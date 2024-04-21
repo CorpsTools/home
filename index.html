@@ -8,14 +8,50 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-		<link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/litera/bootstrap.min.css">
+		<!-- <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/litera/bootstrap.min.css"> -->
+		<link rel="stylesheet" type="text/css" href="/style.css">
 	</head>
 	<body>
 		<div class="container mt-3">
 			<div class="logo-container w-100">
+				<!-- A collection of various websites, applications and tools made by the Corps of Cadets. -->
 				<img class="logo-image d-block mx-auto w-75" src="/corps_tools_full.png" />
+				<button class="btn btn-secondary about-btn" type="button" data-bs-toggle="modal" data-bs-target="#aboutModal">What's this about?</button>
 			</div>
 			<hr />
+			<div class="d-flex flex-row flex-wrap justify-content-evenly">
+				<div class="card tool-card">
+					<a class="btn" href="https://csg.corps.tools" target="_blank">
+						<img src="/tool_logos/csg.png" class="card-img-top" alt="Coversheet Generator Logo">
+						<div class="card-body">
+							<p class="card-text">Generate coversheets for your assignments.</p>
+						</div>
+					</a>
+				</div>
+				<div class="card tool-card">
+					<a class="btn" href="https://pmi.corps.tools" target="_blank">
+						<img src="/tool_logos/pmi.png" class="card-img-top" alt="Digital PMI Logo">
+						<div class="card-body">
+							<p class="card-text">Get PMI signed online. <br> <span class="text-muted">(Currently only available for 1st Regiment)</span></p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">What's this about?</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<img class="logo-image d-block mx-auto w-75" src="/corps_tools_full.png" />
+						<hr />
+						<p class="text-center">A collection of various websites, applications and tools made by the Corps of Cadets.</p>
+					</div>
+				</div>
+			</div>
 		</div>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 	</body>
