@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import Indago from 'indago';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { readFileSync, existsSync, mkdirSync } from 'fs';
 
 const packageInfo = JSON.parse(readFileSync('./package.json').toString());
 
@@ -13,7 +14,11 @@ dotenv.config();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
+
+if (!existsSync(`${__dirname}/indago`)) {
+	mkdirSync(`${__dirname}/indago`);
+}
 
 const analyticsTracker = new Indago.Tracker({
 	savePath: `${__dirname}/indago/${packageInfo.name}-analytics.json`,
@@ -61,7 +66,7 @@ function getAllLocalIPs() {
 	return results;
 }
 
-app.listen(port, () => {
+app.listen(PORT, () => {
 	analyticsTracker.init();
 	console.log(`[${packageInfo.name}] listening on port ${PORT}`);
 });
