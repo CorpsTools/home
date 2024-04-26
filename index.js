@@ -10,6 +10,8 @@ import { readFileSync, existsSync, mkdirSync } from 'fs';
 import passport from 'passport';
 import { Strategy as MicrosoftStrategy } from 'passport-microsoft';
 import session from 'express-session';
+import jwt from 'jsonwebtoken';
+import { createHash } from 'crypto';
 
 const packageInfo = JSON.parse(readFileSync('./package.json').toString());
 
@@ -21,6 +23,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const ROOT_APP_URL = process.env.API_URL || 'http://localhost:' + PORT;
 const SESSION_SECRET = process.env.SESSION_SECRET;
+const CANNY_PRIVATE_KEY = process.env.CANNY_PRIVATE_KEY;
 
 if (!existsSync(`${__dirname}/indago`)) {
 	mkdirSync(`${__dirname}/indago`);
@@ -34,6 +37,11 @@ const analyticsTracker = new Indago.Tracker({
 	},
 	onTick: async () => {}
 });
+
+const currentCannyConfig = {
+	redirectURL: '',
+	companyID: ''
+};
 
 const userSessionMiddleware = session({
 	secret: SESSION_SECRET,
@@ -82,9 +90,16 @@ passport.use(new MicrosoftStrategy({
 		}
 	}
 
-	
+	const userEmail = microsoftProfile.mail === 'korbin.deary@westpoint.edu' ? 'corpstools@pm.me' : microsoftProfile.mail;
 
-	done(null, cadetObj);
+	const userData = {
+		// avatarURL: user.avatarURL, // optional, but preferred
+		email: userEmail,
+		id: createHash('sha256').update(userEmail).digest('hex'),
+		name: microsoftProfile.displayName,
+	};
+
+	done(null, userData);
 }));
 
 passport.serializeUser((user, done) => {
@@ -111,6 +126,28 @@ app.use('/', (req, res, next) => {
 });
 
 app.use('/', express.static(__dirname + '/dist'));
+
+app.get('/auth/microsoft', (req, res, next) => {
+	currentCannyConfig.companyID = req.query.companyID.toString();
+	currentCannyConfig.redirectURL = req.query.redirectURL.toString();
+
+	passport.authenticate('microsoft', {
+		// Optionally define any authentication parameters here
+		// For example, the ones in https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow
+
+		prompt: 'select_account',
+	})(req, res, next);
+});
+
+app.get('/auth/microsoft/callback', passport.authenticate('microsoft', { failureRedirect: ROOT_APP_URL }), (req, res) => {
+	console.log(req.user);
+	const ssoToken = jwt.sign(req.user, CANNY_PRIVATE_KEY, {algorithm: 'HS256'});
+
+	const cannyRedirectURL = 'https://canny.io/api/redirects/sso?companyID=' + currentCannyConfig.companyID +
+		'&ssoToken=' + ssoToken +
+		'&redirect=' + currentCannyConfig.redirectURL;
+	res.redirect(cannyRedirectURL);
+});
 
 app.get('/logout', (req, res) => {
 	res.contentType('text/html');
