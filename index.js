@@ -39,7 +39,7 @@ const analyticsTracker = new Indago.Tracker({
 });
 
 const currentCannyConfig = {
-	redirectURL: '',
+	redirect: '',
 	companyID: ''
 };
 
@@ -127,17 +127,21 @@ app.use('/', (req, res, next) => {
 
 app.use('/', express.static(__dirname + '/dist'));
 
-app.get('/auth/microsoft', (req, res, next) => {
-	currentCannyConfig.companyID = req.query.companyID.toString();
-	currentCannyConfig.redirectURL = req.query.redirectURL.toString();
+app.get('/canny_oauth', (req, res, next) => {
+	currentCannyConfig.companyID = (req.query.companyID || "").toString();
+	currentCannyConfig.redirect = (req.query.redirect || "").toString();
 
+	res.redirect('/auth/microsoft');
+});
+
+app.get('/auth/microsoft',
 	passport.authenticate('microsoft', {
 		// Optionally define any authentication parameters here
 		// For example, the ones in https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow
 
 		prompt: 'select_account',
-	})(req, res, next);
-});
+	})
+);
 
 app.get('/auth/microsoft/callback', passport.authenticate('microsoft', { failureRedirect: ROOT_APP_URL }), (req, res) => {
 	console.log(req.user);
@@ -145,7 +149,7 @@ app.get('/auth/microsoft/callback', passport.authenticate('microsoft', { failure
 
 	const cannyRedirectURL = 'https://canny.io/api/redirects/sso?companyID=' + currentCannyConfig.companyID +
 		'&ssoToken=' + ssoToken +
-		'&redirect=' + currentCannyConfig.redirectURL;
+		'&redirect=' + currentCannyConfig.redirect;
 	res.redirect(cannyRedirectURL);
 });
 
