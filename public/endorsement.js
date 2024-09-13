@@ -62,7 +62,7 @@ window.addEventListener('load', async () => {
 	
 	const endorsementElem = document.createElement('div');
 	document.body.appendChild(endorsementElem);
-	await fetch(imageURL);
+	// await fetch(imageURL);
 	endorsementElem.outerHTML = `<div class="csg-endorsement" onclick="window.open('https://corps.tools')">
 	<div class="b-ge"></div>
 	<div class="f-ge">
