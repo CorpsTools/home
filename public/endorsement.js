@@ -9,12 +9,12 @@ window.addEventListener('load', async () => {
 <style>
 	.csg-endorsement {
 		position: fixed;
-		width: 246px;
-		height: 60px;
+		width: 64px;
+		height: 64px;
 		cursor: pointer;
 		${parsedPosition[0]}: ${posPadding};
 		${parsedPosition[1]}: ${posPadding};
-		transition: all 50ms ease;
+		transition: all 100ms ease;
 	}
 
 	.csg-endorsement:hover {
@@ -58,15 +58,14 @@ window.addEventListener('load', async () => {
 </style>
 `;
 	
-	const imageURL = `${CORPS_TOOLS_URL}/corps_tools_logo_text.png`;
+	const imageURL = `${CORPS_TOOLS_URL}/logo.png`;
 	
 	const endorsementElem = document.createElement('div');
 	document.body.appendChild(endorsementElem);
-	// await fetch(imageURL);
 	endorsementElem.outerHTML = `<div class="csg-endorsement" onclick="window.open('https://corps.tools')">
 	<div class="b-ge"></div>
 	<div class="f-ge">
-		<img src="${CORPS_TOOLS_URL}/corps_tools_logo_text.png" />
+		<img src="${imageURL}" />
 	</div>
 </div>`;
 });
