@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "engines": {
-    "node": "20.x"
+    "node": ">=20.x"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
@@ -25,5 +25,6 @@
   },
   "devDependencies": {
     "vite": "^5.2.0"
-  }
+  },
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }
