@@ -91,12 +91,13 @@ passport.use(new MicrosoftStrategy({
 	}
 
 	const userEmail = microsoftProfile.mail === 'korbin.deary@westpoint.edu' ? 'corpstools@pm.me' : microsoftProfile.mail;
-
+	const anonUsername = microsoftProfile.displayName.replace(/\W/g, ' ').replace(/CDT/g, ' ').split(" ").filter(a => a).map(a => isNaN(Number(a)) ? a[0] : `${a}`).join('');
+	
 	const userData = {
 		// avatarURL: user.avatarURL, // optional, but preferred
 		email: userEmail,
 		id: createHash('sha256').update(userEmail).digest('hex'),
-		name: microsoftProfile.displayName,
+		name: anonUsername,
 	};
 
 	done(null, userData);
