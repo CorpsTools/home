@@ -7,46 +7,48 @@ window.addEventListener('load', async () => {
 
 	document.head.innerHTML += `
 <style>
-	.csg-endorsement {
+	.ct-endorsement {
 		position: fixed;
-		width: 64px;
-		height: 64px;
+		width: 48px;
+		height: 48px;
 		cursor: pointer;
 		${parsedPosition[0]}: ${posPadding};
 		${parsedPosition[1]}: ${posPadding};
-		transition: all 100ms ease;
+		transition: all 150ms ease;
+		opacity: 0.5;
 	}
 
-	.csg-endorsement:hover {
-		${parsedPosition[0]}: calc(${posPadding} + 0.5rem);
+	.ct-endorsement:hover {
+		${parsedPosition[0]}: calc(${posPadding} + 8px);
+		opacity: 0.95;
 	}
 
-	.csg-endorsement .b-ge {
+	.ct-endorsement .b-ge {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		border-radius: 8px;
+		border-radius: 6px;
 		background: #fefefe;
 		box-shadow:  10px 10px 30px #5f5f5f,
 			 -10px -10px 30px #ffffff;
 		opacity: 0.9;
 	}
 
-	.csg-endorsement .f-ge {
+	.ct-endorsement .f-ge {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		padding: 8px;
+		padding: 6px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	}
 
-	.csg-endorsement img {
+	.ct-endorsement img {
 		width: 100%;
 		user-drag: none;
 		-webkit-user-drag: none;
@@ -62,7 +64,7 @@ window.addEventListener('load', async () => {
 	
 	const endorsementElem = document.createElement('div');
 	document.body.appendChild(endorsementElem);
-	endorsementElem.outerHTML = `<div class="csg-endorsement" onclick="window.open('https://corps.tools')">
+	endorsementElem.outerHTML = `<div class="ct-endorsement" onclick="window.open('https://corps.tools')">
 	<div class="b-ge"></div>
 	<div class="f-ge">
 		<img src="${imageURL}" />
