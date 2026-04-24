@@ -128,6 +128,10 @@ app.use('/', (req, res, next) => {
 
 app.use('/', express.static(__dirname + '/dist'));
 
+app.get('/about', (req, res) => {
+	res.sendFile(__dirname + '/dist/about.html');
+});
+
 app.get('/canny_oauth', (req, res, next) => {
 	currentCannyConfig.companyID = (req.query.companyID || "").toString();
 	currentCannyConfig.redirect = (req.query.redirect || "").toString();
