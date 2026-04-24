@@ -3,10 +3,9 @@ import express from 'express';
 import { networkInterfaces } from 'os';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import Indago from 'indago';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { readFileSync, existsSync, mkdirSync } from 'fs';
+import { readFileSync } from 'fs';
 import passport from 'passport';
 import { Strategy as MicrosoftStrategy } from 'passport-microsoft';
 import session from 'express-session';
@@ -24,19 +23,6 @@ const PORT = process.env.PORT || 3000;
 const ROOT_APP_URL = process.env.API_URL || 'http://localhost:' + PORT;
 const SESSION_SECRET = process.env.SESSION_SECRET;
 const CANNY_PRIVATE_KEY = process.env.CANNY_PRIVATE_KEY;
-
-if (!existsSync(`${__dirname}/indago`)) {
-	mkdirSync(`${__dirname}/indago`);
-}
-
-const analyticsTracker = new Indago.Tracker({
-	savePath: `${__dirname}/indago/${packageInfo.name}-analytics.json`,
-	template: {},
-	authentication: {
-		base64: process.env.INDAGO_AUTH
-	},
-	onTick: async () => {}
-});
 
 const currentCannyConfig = {
 	redirect: '',
@@ -117,15 +103,6 @@ app.use(passport.authenticate('session'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/_debug', analyticsTracker.analyticsMW());
-
-app.use('/', (req, res, next) => {
-	if(req.path === '/') {
-		return analyticsTracker.trackerMW()(req, res, next);
-	}
-	next();
-});
-
 app.use('/', express.static(__dirname + '/dist'));
 
 app.get('/about', (req, res) => {
@@ -183,6 +160,5 @@ function getAllLocalIPs() {
 }
 
 app.listen(PORT, () => {
-	analyticsTracker.init();
 	console.log(`[${packageInfo.name}] listening on port ${PORT}`);
 });
