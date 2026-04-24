@@ -43,7 +43,7 @@
                 <img src="/corps_tools_full.png" alt="CorpsTools Logo" class="hero-logo animate-in">
             </a>
             <p class="hero-subtitle animate-in delay-1">
-                Empowering the Corps of Cadets through innovative, cadet-driven technological solutions.
+                Empowering the Corps of Cadets to solve problems using software solutions.
             </p>
             <div class="animate-in delay-2">
                 <a href="#vision" class="btn-primary-custom">Learn More</a>
@@ -59,8 +59,8 @@
                     <div class="info-card text-center">
                         <div class="icon-box icon-box-large mx-auto mb-4"><i class="bi bi-rocket-takeoff"></i></div>
                         <span class="pillar-badge pillar-technical">Mission</span>
-                        <h3>To empower the Corps of Cadets</h3>
-                        <p>Through innovative, cadet-driven technological solutions that enhance daily operations, foster leadership, and streamline cadet life.</p>
+                        <h3>Our Mission</h3>
+                        <p>To empower the Corps of Cadets through innovative, cadet-driven technological solutions that enhance daily operations, foster leadership, and streamline cadet life.</p>
                     </div>
                 </div>
                 <div class="col-md-6 animate-in delay-1">
@@ -105,8 +105,8 @@
                         <hr class="my-4">
                         <ul class="list-unstyled">
                             <li class="mb-2"><i class="bi bi-terminal me-2"></i> <strong>Executive Officer (XO):</strong> Technical lead and operations manager.</li>
-                            <li class="mb-2"><i class="bi bi-git me-2"></i> <strong>Project Maintainers:</strong> Adopting and guiding specific app codebases.</li>
-                            <li><i class="bi bi-cpu me-2"></i> <strong>Volunteer Developers:</strong> Building and deploying code on an asynchronous basis.</li>
+                            <li class="mb-2"><i class="bi bi-git me-2"></i> <strong>Project Maintainers:</strong> Adopting and deploying specific app codebases.</li>
+                            <li><i class="bi bi-cpu me-2"></i> <strong>Volunteer Developers:</strong> Building and maintaining software.</li>
                         </ul>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
     <!-- Footer -->
     <footer class="py-5 text-center text-muted border-top">
         <div class="container">
-            <p>&copy; 2026 CorpsTools. For the Corps, by the Corps.</p>
+            <p>&copy; <span id="current-year"></span> CorpsTools. For the Corps, by the Corps.</p>
         </div>
     </footer>
 
@@ -233,6 +233,8 @@
         document.querySelectorAll('.animate-in').forEach(el => {
             observer.observe(el);
         });
+
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
