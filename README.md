@@ -1,6 +1,6 @@
 # CorpsTools
 
-![CorpsTools Logo](public/corps_tools_full.png)
+![CorpsTools Logo](src/public/corps_tools_full.png)
 
 **For the Corps, by the Corps.**
 
