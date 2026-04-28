@@ -6,18 +6,6 @@
 
 CorpsTools is a centralized hub for innovative, cadet-driven technological solutions designed to empower the Corps of Cadets. It hosts a collection of various websites, applications, and tools created by cadets to solve everyday problems and enhance efficiency within the Corps.
 
-## 🚀 Featured Tools
-
-- **Coversheet Generator (CSG):** Generate perfectly formatted coversheets for assignments.
-- **Transpo:** A tool for connecting traveling cadets to save time and money.
-- **Regulation Wizard:** An AI-powered chatbot for navigating USCC Regulations.
-- **Digital PMI:** Streamlined digital PMI signing (requires company opt-in).
-- **CCQ Plus:** Revolutionizing the CCQ experience.
-- **Citation Generator:** Formatted citations tailored for cadet needs.
-- **OpSSim:** Interactive Operating Systems Simulator to demystify core concepts.
-- **PyVisualParse:** A web interface for visualizing Python Abstract Syntax Trees.
-- **Feedback System:** A centralized place to submit feedback and feature requests for all CorpsTools projects.
-
 ## 🛠 Tech Stack
 
 - **Frontend:** HTML5, CSS3 (Bootstrap 5), JavaScript (ES6+)
@@ -87,11 +75,15 @@ The application will be available at `http://localhost:3000`.
 
 ## 📂 Project Structure
 
-- `index.html`: Main landing page.
-- `about.html`: About page detailing the mission and charter.
 - `index.js`: Express server handling authentication and static file serving.
 - `vite.config.js`: Configuration for building the multi-page application.
-- `public/`: Static assets like logos and icons.
+- `package.json`: Project dependencies and scripts.
+- `src/`: Frontend source directory.
+  - `index.html`: Main landing page.
+  - `about.html`: About page.
+  - `style.css`: Global styles.
+  - `about.css`: Styles specific to the about page.
+  - `public/`: Static assets like logos and icons.
 - `dist/`: Generated production build (after running `build`).
 
 ## 🤝 Contributing
