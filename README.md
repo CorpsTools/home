@@ -95,4 +95,4 @@ We welcome contributions from the Corps! If you have a tool you'd like to list o
 3. Submit a Pull Request.
 
 ---
-*Created and maintained by the Corps of Cadets.*
+*Created and maintained by the CorpsTools Team.*
